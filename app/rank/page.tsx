@@ -12,7 +12,7 @@ export default function Rank() {
   const [selectedItem, setSelectedItem] = useState<ThemeData | null>(null);
 
   const today = new Date();
-  const lastWeek = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
+  const lastWeek = new Date(today.getTime() - 6 * 24 * 60 * 60 * 1000);
   const dateRange = `${lastWeek.toLocaleDateString()} ~ ${new Date(today.getTime()).toLocaleDateString()}`;
 
   const { data: popularThemes = [], isPending } = useQuery({
