@@ -3,10 +3,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { getPopularTheme } from "@/api/theme";
 import { cn } from "@/lib/cn";
-import ThemeItem from "../admin/ThemeContent/ThemeItem";
+import ThemeItem from "../../admin/ThemeContent/ThemeItem";
 import { useState, useCallback } from "react";
 import Dialog from "@/components/Dialog";
-import ThemeItemDialogContent from "../admin/ThemeContent/ThemeItemDialogContent";
+import ThemeItemDialogContent from "../../admin/ThemeContent/ThemeItemDialogContent";
 
 export default function Rank() {
   const [selectedItem, setSelectedItem] = useState<ThemeData | null>(null);

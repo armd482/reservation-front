@@ -1,1 +1,1 @@
-export type ModeType = 'time' | 'theme';
+export type ModeType = 'time' | 'theme' | 'reservation';

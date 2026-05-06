@@ -29,10 +29,10 @@ export default function Dialog({
   return (
     <RadixDialog.Root open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <RadixDialog.Portal>
-        <RadixDialog.Overlay className={cn('fixed inset-0 bg-[rgba(128,134,139,0.5)]')} style={{ zIndex }} />
+        <RadixDialog.Overlay className={cn('top-0, fixed, left-0, w-svw, h-svh, inset-0 bg-[rgba(0,0,0,0.7)]')} style={{ zIndex, position: "fixed" }} />
         <RadixDialog.Content
           className={cn(
-            'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white shadow-2xl outline-none',
+            'fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white shadow-2xl outline-none',
             className,
           )}
           style={{ zIndex: zIndex + 1 }}

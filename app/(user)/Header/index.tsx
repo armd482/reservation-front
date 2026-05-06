@@ -1,7 +1,7 @@
 'use client';
 
+import { ModeType } from '@/types/user';
 import ModeButton from './ModeButton';
-import { ModeType } from '@/types/admin';
 
 interface HeaderProps {
   currentMode: ModeType;
@@ -15,9 +15,9 @@ interface ButtonProps {
 
 export default function Header({ currentMode, onChangeMode }: HeaderProps) {
   const MODE_BUTTONS: ButtonProps[] = [
-    { mode: 'time', name: '시간 관리' },
-    { mode: 'theme', name: '테마 관리' },
-    {mode: 'reservation', name: '전체 예약'}
+    { mode: 'addReservation', name: '예약하기' },
+    { mode: 'myReservation', name: '예약 조회하기' },
+    {mode: 'rank', name: '주간 테마'}
   ];
 
   return (
