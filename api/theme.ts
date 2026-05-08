@@ -39,7 +39,7 @@ export const addTheme = async (payload: AddThemeRequest) => {
 export const getPopularTheme = async() => {
   const today = new Date();
   const lastWeek = new Date(today.getTime() - 6 * 24 * 60 * 60 * 1000);
-  const response = await fetch(`${domain}/themes/popular?start_date=${lastWeek.toISOString().split("T")[0]}&end_date=${today.toISOString().split("T")[0]}&size=10`);
+  const response = await fetch(`${domain}/themes/popular?startDate=${lastWeek.toISOString().split("T")[0]}&endDate=${today.toISOString().split("T")[0]}&size=10`);
 
   if(!response.ok) {
     throw new Error("인기 테마 가져오기 실패");
