@@ -1,15 +1,15 @@
 'use client';
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteReservation, getAllReservations } from "@/api/reservation";
 import Dialog from "@/components/Dialog";
-import { ReservationData } from "@/types/reservation";
+import { ReservationInfoData } from "@/types/reservation";
 import Image from "next/image";
 
 export default function ReservationContent() {
   const queryClient = useQueryClient();
-  const [selectedReservation, setSelectedReservation] = useState<ReservationData | null>(null);
+  const [selectedReservation, setSelectedReservation] = useState<ReservationInfoData | null>(null);
 
   const { data: reservations = [], isLoading } = useQuery({
     queryKey: ["reservations"],
@@ -17,7 +17,7 @@ export default function ReservationContent() {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (id: number) => deleteReservation(id),
+    mutationFn: (id: number) => deleteReservation(id, selectedReservation?.name ?? ''),
     onSuccess: () => {
       alert("예약이 삭제되었습니다.");
       setSelectedReservation(null);

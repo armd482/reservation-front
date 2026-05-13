@@ -5,23 +5,28 @@ import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { getAllTheme } from "@/api/theme";
 import { getAvailableTimes } from "@/api/time";
-import { AddReservationRequest } from "@/types/reservation";
+import { AddReservationRequest, ReservationData } from "@/types/reservation";
 import Dialog from "@/components/Dialog";
 import { cn } from "@/lib/cn";
 import ThemeItem from "@/app/admin/ThemeContent/ThemeItem";
 import ReservationDialogContent from "./ReservationDialogContent";
 
-export default function AddReservation() {
+interface AddReservationProps {
+  data?: ReservationData
+  onClick?: (date: string, themeId: number, timeId: number) => void;
+}
+
+export default function AddReservation({ data, onClick }: AddReservationProps) {
   const [selectedDate, setSelectedDate] = useState<string>(new Date().toISOString().split('T')[0]);
   const [selectedTheme, setSelectedTheme] = useState<ThemeData | null>(null);
   const [selectedTime, setSelectedTime] = useState<TimeData | null>(null);
 
   const formMethods = useForm<AddReservationRequest>({
     defaultValues: { 
-      name: '',
-      date: '',
-      themeId: -1,
-      timeId: -1,
+      name: data?.name ?? '',
+      date: data?.date ?? '',
+      themeId: data?.themeId ?? -1,
+      timeId: data?.timeId ?? -1,
     }
   });
 
@@ -37,16 +42,20 @@ export default function AddReservation() {
   });
 
   const handleTimeClick = (time: TimeData) => {
+    if(data && selectedTheme && selectedDate) {
+      onClick?.(selectedDate, selectedTheme?.id ?? -1, time.id);
+      return;
+    }
     setSelectedTime(time);
   };
 
   const handleDialogClose = () => {
     setSelectedTime(null);
-    formMethods.resetField("name"); // 닫을 때 이름 필드만 초기화하거나 전체 reset() 가능
+    formMethods.resetField("name");
   };
 
   return (
-    <div className="flex w-full min-h-screen bg-gray-50">
+    <div className="flex w-full flex-1 bg-gray-50">
       <div className="w-1/2 p-8 border-r bg-white overflow-y-auto">
         <section className="mb-10">
           <h2 className="text-xl font-bold mb-4">1. 날짜 선택</h2>
