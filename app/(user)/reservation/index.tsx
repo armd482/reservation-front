@@ -35,8 +35,8 @@ export default function Reservation() {
       setSelectedReservation(null);
       queryClient.invalidateQueries({ queryKey: ["reservations", name] });
     },
-    onError: () => {
-      alert("예약 수정 중 오류가 발생했습니다.");
+    onError: (errors) => {
+      alert(errors.message);
     }
   });
 
@@ -47,6 +47,9 @@ export default function Reservation() {
       setSelectedReservation(null);
       queryClient.invalidateQueries({ queryKey: ["reservations", name] });
     },
+    onError: (error) => {
+      alert(error.message);
+    }
   });
 
   const onSubmit = (data: SearchForm) => {

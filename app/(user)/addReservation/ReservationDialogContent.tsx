@@ -30,6 +30,10 @@ export default function ReservationDialogContent({
       alert("예약이 완료되었습니다!");
       queryClient.invalidateQueries({ queryKey: ["availableTimes", date, theme.id] });
       onClose();
+    },
+    onError:(errors) => {
+      console.log(errors);
+      alert(errors.message);
     }
   });
 
