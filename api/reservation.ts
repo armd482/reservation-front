@@ -33,13 +33,13 @@ export const getAllReservations = async() => {
 export const getAllReservationsByName = async (name: String) => {
   const response = await fetch(`${domain}/reservations?name=${name}`);
 
-  const data  = await response.json() as ResponseType;
+  const data  = await response.json();
   
   if(!response.ok) {
     throw new Error(data?.errorMessage ?? "예약 생성 실패");
   }
 
-  return data.data as ReservationInfoData[];
+  return data as ReservationInfoData[];
 }
 
 export const deleteReservation = async (id: number, name: string) => {
