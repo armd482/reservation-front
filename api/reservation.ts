@@ -59,7 +59,7 @@ export const deleteReservation = async (id: number, name: string) => {
 
 export const updateReservation = async(payload: ReservationData) => {
   const response = await fetch(`${domain}/reservations/${payload.id}`, {
-    method: "POST",
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
       "name": encodeURIComponent(payload.name),
