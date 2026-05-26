@@ -17,7 +17,15 @@ export default function User() {
   return (
     <div className='flex flex-1 flex-col'>
       <Header currentMode={mode} onChangeMode={handleChaneMode} />
-      <div className='flex flex-1'>{mode === "addReservation" ? <AddReservation /> : mode === 'myReservation' ? <Reservation /> : <Rank/>}</div>
+      <div className='flex flex-1'>
+        {mode === "addReservation" ? (
+          <div className="flex flex-1 p-10 bg-slate-50/50">
+            <div className="flex flex-1 max-w-7xl mx-auto rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+              <AddReservation />
+            </div>
+          </div>
+        ) : mode === 'myReservation' ? <Reservation /> : <Rank />}
+      </div>
     </div>
   );
 }

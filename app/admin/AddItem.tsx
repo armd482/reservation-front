@@ -26,7 +26,7 @@ export default function AddContent({ onClick, className }: AddContentProps) {
           "bg-white text-slate-400 transition-all duration-300",
           "group-hover:border-blue-500 group-hover:bg-blue-500 group-hover:text-white group-hover:rotate-90"
         )}>
-          <svg xmlns="http://www.w3.org/2000/svg" className="size-6 stroke-[3]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" className="size-6 stroke-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
           </svg>
         </div>

@@ -17,7 +17,7 @@ export default function Header({ currentMode, onChangeMode }: HeaderProps) {
   const MODE_BUTTONS: ButtonProps[] = [
     { mode: 'addReservation', name: '예약하기' },
     { mode: 'myReservation', name: '예약 조회하기' },
-    {mode: 'rank', name: '주간 테마'}
+    { mode: 'rank', name: '주간 테마' },
   ];
 
   return (

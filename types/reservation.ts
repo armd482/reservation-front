@@ -8,9 +8,17 @@ export interface AddReservationRequest {
 export interface ReservationInfoData extends Omit<AddReservationRequest, "themeId" | "timeId"> {
   id: number,
   time: TimeData,
-  reservationTheme: ThemeData,
+  theme: ThemeData,
 }
 
 export interface ReservationData extends AddReservationRequest {
   id: number;
+  originalName?: string;
+}
+
+export interface WaitingReservationInfoData extends Omit<AddReservationRequest, "themeId" | "timeId"> {
+  id: number;
+  sequence: number;
+  time: TimeData;
+  theme: ThemeData;
 }

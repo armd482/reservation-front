@@ -1,7 +1,7 @@
 interface AddThemeRequest {
   name: string;
   description: string;
-  imageUrl: string;
+  url: string;
 }
 
 interface ThemeData extends AddThemeRequest {

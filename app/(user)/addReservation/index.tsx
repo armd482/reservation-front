@@ -13,13 +13,13 @@ import ReservationDialogContent from "./ReservationDialogContent";
 
 interface AddReservationProps {
   data?: ReservationData
-  onClick?: (date: string, themeId: number, timeId: number) => void;
+  onClick?: (date: string, theme: ThemeData, time: AvailableTimeData) => void;
 }
 
 export default function AddReservation({ data, onClick }: AddReservationProps) {
   const [selectedDate, setSelectedDate] = useState<string>(new Date().toISOString().split('T')[0]);
   const [selectedTheme, setSelectedTheme] = useState<ThemeData | null>(null);
-  const [selectedTime, setSelectedTime] = useState<TimeData | null>(null);
+  const [selectedTime, setSelectedTime] = useState<AvailableTimeData | null>(null);
 
   const formMethods = useForm<AddReservationRequest>({
     defaultValues: { 
@@ -41,10 +41,15 @@ export default function AddReservation({ data, onClick }: AddReservationProps) {
     enabled: !!selectedDate && !!selectedTheme,
   });
 
-  const handleTimeClick = (time: TimeData) => {
-    if(data && selectedTheme && selectedDate) {
-      onClick?.(selectedDate, selectedTheme?.id ?? -1, time.id);
+  const handleTimeClick = (time: AvailableTimeData) => {
+    if (data) {
+      if (selectedTheme && selectedDate) {
+        onClick?.(selectedDate, selectedTheme, time);
+      }
       return;
+    }
+    if (!time.isAvailable) {
+      alert("해당 시간에 이미 예약이 존재합니다. 대기열로 들어갑니다.");
     }
     setSelectedTime(time);
   };
@@ -103,8 +108,12 @@ export default function AddReservation({ data, onClick }: AddReservationProps) {
               <button
                 key={time.id}
                 onClick={() => handleTimeClick(time)}
-                disabled={!time.isAvailable}
-                className={cn("py-4 rounded-xl border-2 border-gray-200 bg-white font-bold text-lg shadow-sm", time.isAvailable && "hover:border-blue-500 hover:text-blue-600 transition-all", !time.isAvailable && "opacity-25")}
+                className={cn(
+                  "py-4 rounded-xl border-2 font-bold text-lg shadow-sm transition-all",
+                  time.isAvailable
+                    ? "border-gray-200 bg-white hover:border-blue-500 hover:text-blue-600"
+                    : "border-red-200 bg-red-50 text-red-500 hover:border-red-400"
+                )}
               >
                 {time.startAt}
               </button>
@@ -119,10 +128,11 @@ export default function AddReservation({ data, onClick }: AddReservationProps) {
         className="rounded-3xl"
       >
         {selectedTime && selectedTheme && (
-          <ReservationDialogContent 
+          <ReservationDialogContent
             date={selectedDate}
             theme={selectedTheme}
             time={selectedTime}
+            isQueue={!selectedTime.isAvailable}
             onClose={handleDialogClose}
             formMethods={formMethods}
           />

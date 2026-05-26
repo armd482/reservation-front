@@ -24,7 +24,7 @@ export default function ThemeItem({ value, onClick, isSelected }: ThemeItemProps
         {/* 이미지 섹션 */}
         <div className="relative w-full h-52 overflow-hidden bg-slate-100">
           <Image 
-            src={value.imageUrl} 
+            src={value.url} 
             alt={value.name}
             fill
             // 뷰포트에 따른 이미지 최적화 크기 지정

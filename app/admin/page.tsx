@@ -19,7 +19,7 @@ export default function Admin() {
   return (
     <div className='flex flex-1 flex-col'>
       <Header currentMode={mode} onChangeMode={handleChaneMode} />
-      <div className='flex flex-1'>{mode === 'time' ? <TimeContent /> : mode === 'theme' ? <ThemeContent /> : <ReservationContent/>}</div>
+      <div className='flex flex-1'>{mode === 'time' ? <TimeContent /> : mode === 'theme' ? <ThemeContent /> : <ReservationContent />}</div>
     </div>
   );
 }

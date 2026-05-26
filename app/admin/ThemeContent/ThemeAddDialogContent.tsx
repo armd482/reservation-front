@@ -19,7 +19,7 @@ export default function ThemeAddDialogContent({ onClose }: ThemeAddDialogContent
   const [isUploading, setIsUploading] = useState(false);
 
   const { register, handleSubmit, formState: { errors } } = useForm<AddThemeRequest>({
-    defaultValues: { name: '', description: '', imageUrl: '' }
+    defaultValues: { name: '', description: '', url: '' }
   });
 
   const { mutate: addThemeMutate, isPending } = useMutation({
@@ -52,8 +52,8 @@ export default function ThemeAddDialogContent({ onClose }: ThemeAddDialogContent
       setIsUploading(true);
       const formData = new FormData();
       formData.append("image", selectedFile);
-      const imageUrl = await getImageUrl(formData);
-      addThemeMutate({ ...data, imageUrl });
+      const url = await getImageUrl(formData);
+      addThemeMutate({ ...data, url });
     } catch {
       alert("이미지 업로드에 실패하였습니다.");
     } finally {

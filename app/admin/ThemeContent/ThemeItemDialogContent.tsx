@@ -10,11 +10,12 @@ export default function ThemeItemDialogContent({ item }: ThemeItemDialogContentP
   return (
     <div className="flex flex-col w-full bg-white">      
       <div className="relative w-full h-112.5 bg-slate-900">
-        <Image 
-          src={item.imageUrl} 
-          alt={item.name} 
-          fill 
+        <Image
+          src={item.url}
+          alt={item.name}
+          fill
           className="object-cover opacity-80"
+          sizes="100vw"
           priority
         />
         <div className="absolute inset-0 bg-linear-to-t from-slate-900 via-transparent to-transparent" />

@@ -14,7 +14,7 @@ export const getAllTime = async () => {
 }
 
 export const getAvailableTimes = async (date: string, themeId: number) => {
-  const response = await fetch(`${domain}/times/availability?date=${date}&themeId=${themeId}`, {
+  const response = await fetch(`${domain}/times/available?date=${date}&themeId=${themeId}`, {
   })
 
 

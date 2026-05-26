@@ -17,7 +17,7 @@ export default function Header({ currentMode, onChangeMode }: HeaderProps) {
   const MODE_BUTTONS: ButtonProps[] = [
     { mode: 'time', name: '시간 관리' },
     { mode: 'theme', name: '테마 관리' },
-    {mode: 'reservation', name: '전체 예약'}
+    { mode: 'reservation', name: '전체 예약' },
   ];
 
   return (

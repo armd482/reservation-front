@@ -1,7 +1,7 @@
 'use client';
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createReservation } from "@/api/reservation";
+import { createReservation, createWaitingReservations } from "@/api/reservation";
 import { AddReservationRequest } from "@/types/reservation";
 import { UseFormReturn } from "react-hook-form";
 
@@ -9,25 +9,27 @@ interface ReservationDialogContentProps {
   date: string;
   theme: ThemeData;
   time: TimeData;
+  isQueue?: boolean;
   onClose: () => void;
   formMethods: UseFormReturn<AddReservationRequest>; // 타입 지정
 }
 
-export default function ReservationDialogContent({ 
-  date, 
-  theme, 
-  time, 
-  onClose, 
-  formMethods 
+export default function ReservationDialogContent({
+  date,
+  theme,
+  time,
+  isQueue = false,
+  onClose,
+  formMethods
 }: ReservationDialogContentProps) {
   
   const { register, handleSubmit, formState: { errors } } = formMethods;
   const queryClient = useQueryClient();
 
   const { mutate: reserve, isPending } = useMutation({
-    mutationFn: createReservation,
+    mutationFn: isQueue ? createWaitingReservations : createReservation,
     onSuccess: () => {
-      alert("예약이 완료되었습니다!");
+      alert(isQueue ? "대기열 등록이 완료되었습니다!" : "예약이 완료되었습니다!");
       queryClient.invalidateQueries({ queryKey: ["availableTimes", date, theme.id] });
       onClose();
     },
@@ -48,7 +50,7 @@ export default function ReservationDialogContent({
 
   return (
     <div className="p-8 w-96">
-      <h2 className="text-2xl font-bold mb-6 text-center text-blue-600">예약 확인</h2>
+      <h2 className="text-2xl font-bold mb-6 text-center text-blue-600">{isQueue ? "대기열 확인" : "예약 확인"}</h2>
       
       <div className="bg-gray-50 p-4 rounded-2xl mb-6 flex flex-col gap-2 shadow-inner">
         <div className="flex justify-between">
